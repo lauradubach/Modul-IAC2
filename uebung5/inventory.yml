@@ -1,0 +1,10 @@
+all:
+  children:
+    webserver:
+      hosts:
+        web1.example.com:
+        web2.example.com:
+      vars:
+        server_name: "www.kunde.com"
+        username: "kundeuser"
+        password: "kundepass"

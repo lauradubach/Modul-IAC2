@@ -1,0 +1,60 @@
+- name: Apache Webserver installieren und konfigurieren
+  hosts: webserver
+  become: true
+  vars:
+    htpasswd_path: "/etc/apache2/.htpasswd"
+    vhost_config_path: "/etc/apache2/sites-available/{{ server_name }}.conf"
+    document_root: "/var/www/{{ server_name }}"
+
+  tasks:
+    - name: Installiere Apache-Webserver
+      ansible.builtin.package:
+        name: apache2
+        state: present
+
+    - name: Erstelle Dokumentenverzeichnis für den virtuellen Host
+      ansible.builtin.file:
+        path: "{{ document_root }}"
+        state: directory
+        owner: www-data
+        group: www-data
+        mode: '0755'
+
+    - name: Konfiguriere den virtuellen Host für {{ server_name }}
+      ansible.builtin.template:
+        src: templates/kunde_vhost.j2
+        dest: "{{ vhost_config_path }}"
+        mode: '0644'
+
+    - name: Aktiviere den virtuellen Host
+      ansible.builtin.command:
+        cmd: "a2ensite {{ server_name }}"
+      notify: Reload Apache
+
+    - name: Erstelle .htpasswd Datei für den Passwortschutz
+      ansible.builtin.htpasswd:
+        path: "{{ htpasswd_path }}"
+        name: "{{ username }}"
+        password: "{{ password }}"
+
+    - name: Aktivieren des auth_basic Moduls
+      ansible.builtin.command:
+        cmd: "a2enmod auth_basic"
+      notify: Reload Apache
+
+    - name: Setze Zugriffsschutz für das Dokumentenverzeichnis
+      ansible.builtin.blockinfile:
+        path: "{{ vhost_config_path }}"
+        insertafter: '<Directory /var/www/{{ server_name }}>'
+        content: |
+          AuthType Basic
+          AuthName "Restricted Content"
+          AuthUserFile {{ htpasswd_path }}
+          Require valid-user
+      notify: Reload Apache
+
+  handlers:
+    - name: Reload Apache
+      ansible.builtin.service:
+        name: apache2
+        state: reloaded
