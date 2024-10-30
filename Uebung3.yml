@@ -1,0 +1,36 @@
+Migros:
+  hosts:
+    WebServerMigros:
+    DBServerMigros:
+
+Coop:
+  hosts:
+    WebServerCoop:
+    DBServerCoop:
+
+Nationalbank:
+  hosts:
+    WebServerBank:
+      usernamewebbank: "usernamebank"
+      passwordwebbank: "passwordbank"
+    DBServerBank:
+      usernamedbbank: "dbbank"
+      passworddbbank: "dbbank"
+
+WebServer:
+  hosts:
+    WebServerMigros:
+    WebServerCoop:
+    WebServerBank:
+  vars:
+    usernameweb: "usernameweb"
+    passwordweb: "passwordweb"
+
+DBServer:
+  hosts:
+    DBServerMigros:
+    DBServerCoop:
+    DBServerBank:
+  vars:
+    usernamedb: "usernamedb"
+    passworddb: "passworddb"
