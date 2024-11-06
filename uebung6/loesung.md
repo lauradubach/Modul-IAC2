@@ -2,7 +2,7 @@ Als erstes einen Server bereitstellen, wo via SSH mit dem Ansible verbunden ist.
 
 Auf der Ansible VM SSH key erstelle:
 - Im ordner .ssh `ssh-keygen`
-- Key kopieren und auf dem anderen Server bereittstellen. Im authorized_keys hinterlegen (unter den anderen reinkopieren)
+- Key kopieren und auf dem anderen Server bereitstellen. Im authorized_keys hinterlegen (unter dem anderen reinkopieren)
 - Hostkey Check disablen auf dem Ansible Server -> export ANSIBLE_HOST_KEY_CHECKING=false
 
 #### Schritt 1: Erstelle das Projektverzeichnis und die Rollenstruktur
