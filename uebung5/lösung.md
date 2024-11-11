@@ -1,6 +1,6 @@
 # Mein vorgehen
 
-Auf de asible VM folgends installieren:
+Auf de ansible VM folgends installieren:
 
 `sudo apt install awscli`
 `sudo apt install ansible`
