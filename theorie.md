@@ -1,0 +1,5 @@
+# Was ist Continuous Integration (CI)?
+Continuous Integration (CI) ist eine Praxis in der Softwareentwicklung, bei der Codeänderungen regelmäßig und automatisch in ein gemeinsames Repository integriert werden. Das Hauptziel von CI ist es, Konflikte und Fehler frühzeitig im Entwicklungsprozess zu erkennen. Das bedeutet, dass Entwickler häufig kleine Codeänderungen vornehmen und diese in das Hauptrepository zusammenführen. Dadurch werden Konflikte minimiert und die Qualität des Codes verbessert.
+
+# Was ist Continuous Deployment (CD)?
+Continuous Deployment (CD) ist der Schritt, der auf CI folgt. Bei CD werden die Änderungen, die im CI-Prozess überprüft und als stabil befunden wurden, automatisch in die Produktionsumgebung bereitgestellt. Dies ermöglicht eine schnelle und häufige Auslieferung von Softwareanwendungen.
